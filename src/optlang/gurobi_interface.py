@@ -52,8 +52,6 @@ _GUROBI_STATUS_TO_STATUS = {
     
 }
 
-gurobipy.GRB.Param.Seed = 12345
-
 _LP_METHODS = {"auto": -1, "primal": 0, "dual": 1, "barrier": 2, "concurrent": 3, "deterministic_concurrent": 4}
 _REVERSE_LP_METHODS = {v: k for k, v in _LP_METHODS.items()}
 _QP_METHODS = {"auto": -1, "primal": 0, "dual": 1, "barrier": 2}
@@ -111,6 +109,7 @@ class Variable(interface.Variable):
 
     def _set_variable_bounds_on_problem(self, var_lb, var_ub):
         lb = [
+            (var.name, -gurobipy.GRB.INFINITY) if val is None else (var.name, val) for var, val in var_lb
             (var.name, -gurobipy.GRB.INFINITY) if val is None else (var.name, val) for var, val in var_lb
             ]
         if len(lb) > 0:
