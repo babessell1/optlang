@@ -16,7 +16,6 @@
 
 """
 Solver interface for the Gurobi (MI)LP/QP solver.
-
 To use this interface, install the gurobi solver and the bundled python interface
 and make sure that 'import gurobipy' runs without error.
 """
@@ -49,7 +48,6 @@ _GUROBI_STATUS_TO_STATUS = {
     gurobipy.GRB.NUMERIC: interface.NUMERIC,
     gurobipy.GRB.SUBOPTIMAL: interface.SUBOPTIMAL,
     gurobipy.GRB.INPROGRESS: interface.INPROGRESS
-    
 }
 
 _LP_METHODS = {"auto": -1, "primal": 0, "dual": 1, "barrier": 2, "concurrent": 3, "deterministic_concurrent": 4}
@@ -109,7 +107,6 @@ class Variable(interface.Variable):
 
     def _set_variable_bounds_on_problem(self, var_lb, var_ub):
         lb = [
-            (var.name, -gurobipy.GRB.INFINITY) if val is None else (var.name, val) for var, val in var_lb
             (var.name, -gurobipy.GRB.INFINITY) if val is None else (var.name, val) for var, val in var_lb
             ]
         if len(lb) > 0:
