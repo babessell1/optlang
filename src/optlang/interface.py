@@ -966,7 +966,7 @@ class Objective(OptimizationExpression):
             expression,
             direction=json_obj["direction"],
             name=json_obj["name"]
-        
+        )
 
 class Configuration(object):
     """
