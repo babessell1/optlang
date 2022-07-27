@@ -472,8 +472,10 @@ class Configuration(interface.MathematicalProgrammingConfiguration):
         if self.problem is not None:
             if value is None:
                 self.problem.problem.params.TimeLimit = gurobipy.GRB.INFINITY
+                print("SET INFINITY!!!!!!!!!!!!!!!!!!!!!!!")
             else:
                 self.problem.problem.params.TimeLimit = value
+                print("SET VALUE!!!!!!!!!!!!!!!!!!!!!!! :C")
         self._timeout = value
 
     def __getstate__(self):
@@ -529,6 +531,8 @@ class Model(interface.Model):
     def _initialize_problem(self):
         self.problem = gurobipy.Model()
         self.problem.params.OutputFlag = 0
+        self.problem.params.Seed = 12345
+        print("SET SEED")
         if self.name is not None:
             self.problem.setAttr('ModelName', self.name)
             self.problem.update()
